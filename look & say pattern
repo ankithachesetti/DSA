@@ -1,0 +1,65 @@
+Given an integer n. Return the nth row of the following look-and-say pattern.
+1
+11
+21
+1211
+111221
+Look-and-Say Pattern:
+
+To generate a member of the sequence from the previous member, read off the digits of the previous member, counting the number of digits in groups of the same digit. For example:
+
+1 is read off as "one 1" or 11.
+11 is read off as "two 1s" or 21.
+21 is read off as "one 2, then one 1" or 1211.
+1211 is read off as "one 1, one 2, then two 1s" or 111221.
+111221 is read off as "three 1s, two 2s, then one 1" or 312211.
+
+//{ Driver Code Starts
+// Initial Template for Java
+import java.io.*;
+import java.util.*;
+
+class GFG {
+    public static void main(String args[]) throws IOException {
+        BufferedReader read = new BufferedReader(new InputStreamReader(System.in));
+        int t = Integer.parseInt(read.readLine());
+
+        while (t-- > 0) {
+            int n = Integer.parseInt(read.readLine());
+
+            Solution ob = new Solution();
+
+            System.out.println(ob.countAndSay(n));
+
+            System.out.println("~");
+        }
+    }
+}
+// } Driver Code Ends
+
+
+class Solution {
+    public String countAndSay(int n) {
+        // code here
+        if(n==1)
+        return "1";
+        String term="1";
+        for(int i=2;i<=n;i++){
+            int count=1;
+            String next="";
+        for(int j=1;j<term.length();j++){
+        if(term.charAt(j)==term.charAt(j-1)){
+            count++;
+        }
+        else{
+            next+=count+""+term.charAt(j-1);
+            count=1;
+        }
+        }
+        next+=count+""+term.charAt(term.length()-1);
+        term=next;
+        
+        }
+        return term;
+    }
+}
